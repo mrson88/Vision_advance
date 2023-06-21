@@ -5,7 +5,7 @@ import pathlib
 import numpy as np
 
 tf.random.set_seed(42)
-data_dir = pathlib.Path("../anh_train/pizza_steak/pizza_steak/train/")  # biến đường dẫn đào tạo
+data_dir = pathlib.Path("../anh_train/human_dataset/train")  # biến đường dẫn đào tạo
 class_names = np.array(sorted([item.name for item in data_dir.glob('*')]))  # tạo danh sách tên_lớp từ thư mục con
 # print(class_names)
 # # Dữ liệu tiền xử lý (lấy tất cả các giá trị pixel từ 1 đến 0, còn được gọi là chia tỷ lệ/chuẩn hóa)
@@ -13,8 +13,8 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255
 valid_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255)
 
 # Nhập dữ liệu từ các thư mục và biến nó thành các lô
-train_dir = "../anh_train/pizza_steak/pizza_steak/train/"
-test_dir = "../anh_train/pizza_steak/pizza_steak/test/"
+train_dir = "../anh_train/human_dataset/train/"
+test_dir = "../anh_train/human_dataset/test/"
 
 # Nhập dữ liệu từ các thư mục và biến nó thành các lô
 train_data = train_datagen.flow_from_directory(train_dir,

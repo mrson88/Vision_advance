@@ -21,8 +21,8 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255
 valid_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255)
 
 # Nhập dữ liệu từ các thư mục và biến nó thành các lô
-train_dir = "../anh_train/pizza_steak/pizza_steak/train/"
-test_dir = "../anh_train/pizza_steak/pizza_steak/test/"
+train_dir = "../anh_train/human_hourse/horse-or-human/train"
+test_dir = "../anh_train/human_hourse/horse-or-human/validation"
 
 # Nhập dữ liệu từ các thư mục và biến nó thành các lô
 
@@ -61,15 +61,15 @@ model_4.compile(loss="binary_crossentropy",
 
 # Fit model
 history_4 = model_4.fit(train_data_augmented,
-                        epochs=50,
+                        epochs=25,
                         steps_per_epoch=len(train_data_augmented),
                         validation_data=valid_data_augmented,
                         validation_steps=len(valid_data_augmented))
 
 model_4.summary()
-model_4.save("saved_trained_model_4")
+model_4.save("saved_trained_model_human_hourse")
 
-loaded_model_4 = tf.keras.models.load_model("saved_trained_model_4")
+loaded_model_4 = tf.keras.models.load_model("saved_trained_model_human_hourse")
 loaded_model_4.evaluate(valid_data_augmented)
 
 
