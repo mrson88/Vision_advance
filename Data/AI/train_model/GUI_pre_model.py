@@ -45,18 +45,28 @@ def load_and_prep_image(filename, img_shape=224):
     return img
 
 
-loaded_model_11 = tf.keras.models.load_model("../saved_trained_model_1")
+loaded_model_11 = tf.keras.models.load_model("saved_trained_model_4")
 print(loaded_model_11.evaluate(valid_data))
 # Tải  hình ảnh
-img = load_and_prep_image("../anh_test/2222.jpg")
 
-# dự đoán
-pred = loaded_model_11.predict(tf.expand_dims(img, axis=0))
-
-# Khớp lớp dự đoán với xác suất dự đoán cao nhất
-pred_class = class_names[pred.argmax()]
-print(pred_class)
-plt.imshow(img)
-plt.title(pred_class)
-plt.axis(False)
-plt.show()
+def predict(img):
+    pred = loaded_model_11.predict(tf.expand_dims(img, axis=0))
+    pred_class = class_names[int(tf.round(pred)[0][0])]
+    # print(pred_class)
+    # plt.imshow(img)
+    # plt.title(pred_class)
+    # plt.axis(False)
+    # plt.show()
+    return pred_class
+# img = load_and_prep_image("../anh_test/pizza3.jpeg")
+#
+# # dự đoán
+# pred = loaded_model_11.predict(tf.expand_dims(img, axis=0))
+#
+# # Khớp lớp dự đoán với xác suất dự đoán cao nhất
+# pred_class = class_names[int(tf.round(pred)[0][0])]
+# print(pred_class)
+# plt.imshow(img)
+# plt.title(pred_class)
+# plt.axis(False)
+# plt.show()

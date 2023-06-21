@@ -25,7 +25,12 @@ valid_data = valid_datagen.flow_from_directory(test_dir,
                                                seed=42)
 
 
-model_1 = tf.keras.models.Sequential([
+
+#
+# # biên dịch model
+
+
+model_2 = tf.keras.models.Sequential([
   tf.keras.layers.Conv2D(filters=10, # số lượng bộ lọc
                          kernel_size=3, #kích thước nhân
                          activation="relu",
@@ -36,32 +41,24 @@ model_1 = tf.keras.models.Sequential([
   tf.keras.layers.Conv2D(10, 3, activation="relu"),
   tf.keras.layers.Conv2D(10, 3, activation="relu"),
   tf.keras.layers.MaxPool2D(2),
-  tf.keras.layers.Flatten(),
-tf.keras.layers.Dense(1, activation="relu"),
-tf.keras.layers.Dense(1, activation="relu"),
+  tf.keras.layers.Flatten(input_shape=(224,224,3)),
+tf.keras.layers.Dense(100, activation="relu"),
+tf.keras.layers.Dense(100, activation="relu"),
   tf.keras.layers.Dense(1, activation="sigmoid"), # 1 đầu ra  kích hoạt nhị phân
 ])
-#
 # biên dịch model
-model_1.compile(loss="binary_crossentropy",
+model_2.compile(loss="binary_crossentropy",
               optimizer=tf.keras.optimizers.Adam(),
               metrics=["accuracy"])
 
 # Fit model
-history_1 = model_1.fit(train_data,
-                        epochs=5,
+history_2 = model_2.fit(train_data,
+                        epochs=10,
                         steps_per_epoch=len(train_data),
                         validation_data=valid_data,
                         validation_steps=len(valid_data))
-
-model_1.summary()
-model_1.save("saved_trained_model_1")
-loaded_model_1 = tf.keras.models.load_model("../saved_trained_model_1")
-loaded_model_1.evaluate(valid_data)
-
-
-
-
+model_2.summary()
+model_2.save("saved_trained_model_2")
 def plot_loss_curves(history):
   loss = history.history['loss']
   val_loss = history.history['val_loss']
@@ -87,4 +84,4 @@ def plot_loss_curves(history):
   plt.legend()
   plt.show()
 # plot_loss_curves(history_1)
-plot_loss_curves(history_1)
+plot_loss_curves(history_2)

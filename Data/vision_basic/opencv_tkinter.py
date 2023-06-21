@@ -14,8 +14,8 @@ imgTk = ImageTk. PhotoImage(img1) #chuyen anh tu cv2
 # lb = Label(wd, width=640, height=480)
 # lb.pack(padx=1, pady=1)
 # lb.config(image=imgTk)
- canvas = Canvas(wd, width=640, height=480)
- canvas.pack(padx=1, pady=1)
+canvas = Canvas(wd, width=640, height=480)
+canvas.pack(padx=1, pady=1)
 # canvas.create_image(0, 0, anchor=NW, image = imgTk)
 # canvas.create_image(0, 0, image = imgTk)
 def chonanh():
