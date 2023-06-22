@@ -17,7 +17,7 @@ import os
 
 import pathlib
 import numpy as np
-data_dir = pathlib.Path("../anh_train/pizza_steak/pizza_steak/train/") # biến đường dẫn đào tạo
+data_dir = pathlib.Path("../anh_train/10_food_classes_all_data/10_food_classes_all_data/train") # biến đường dẫn đào tạo
 class_names = np.array(sorted([item.name for item in data_dir.glob('*')])) #  tạo danh sách tên_lớp từ thư mục con
 print(class_names)
 
@@ -42,6 +42,6 @@ def view_random_image(target_dir, target_class):
   print(f"Image shape: {img.shape}") # hiển thị ảnh
 
   return img
-img = view_random_image(target_dir="../anh_train/pizza_steak/pizza_steak/train/", target_class="steak")
+img = view_random_image(target_dir="../anh_train/10_food_classes_all_data/10_food_classes_all_data/train/", target_class="chicken_curry")
 img = img/255
 print(img)

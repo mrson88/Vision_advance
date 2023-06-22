@@ -1,4 +1,5 @@
 import tensorflow as tf
+
 import matplotlib.pyplot as plt
 # giá trị ngẫu nhiên cố định
 tf.random.set_seed(42)
