@@ -12,22 +12,22 @@ class_names = np.array(sorted([item.name for item in data_dir.glob('*')]))  # t�
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255)
 valid_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255)
 
-# Nhập dữ liệu từ các thư mục và biến nó thành các lô
-train_dir = "../anh_train/Anh_em/train/"
-test_dir = "../anh_train/Anh_em/test/"
-
-# Nhập dữ liệu từ các thư mục và biến nó thành các lô
-train_data = train_datagen.flow_from_directory(train_dir,
-                                               batch_size=32,  # số ảnh cần xử lý tại một thời điểm
-                                               target_size=(224, 224),  # chuyển đổi tất cả ảnh thành 224 x 224
-                                               class_mode="categorical",  # phân loại nhị phân
-                                               )
-
-valid_data = valid_datagen.flow_from_directory(test_dir,
-                                               batch_size=32,
-                                               target_size=(224, 224),
-                                               class_mode="categorical",
-                                               )
+# # Nhập dữ liệu từ các thư mục và biến nó thành các lô
+# train_dir = "../anh_train/Anh_em/train/"
+# test_dir = "../anh_train/Anh_em/test/"
+#
+# # Nhập dữ liệu từ các thư mục và biến nó thành các lô
+# train_data = train_datagen.flow_from_directory(train_dir,
+#                                                batch_size=32,  # số ảnh cần xử lý tại một thời điểm
+#                                                target_size=(224, 224),  # chuyển đổi tất cả ảnh thành 224 x 224
+#                                                class_mode="categorical",  # phân loại nhị phân
+#                                                )
+#
+# valid_data = valid_datagen.flow_from_directory(test_dir,
+#                                                batch_size=32,
+#                                                target_size=(224, 224),
+#                                                class_mode="categorical",
+#                                                )
 # train_data = train_datagen.flow_from_directory(train_dir,
 #                                                batch_size=32,  # số ảnh cần xử lý tại một thời điểm
 #                                                target_size=(224, 224),  # chuyển đổi tất cả ảnh thành 224 x 224
