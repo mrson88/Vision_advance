@@ -4,12 +4,12 @@ import cv2
 import cvlib as cv
 
 # tải model
-model = tf.keras.models.load_model('detect_face_1.h5')
+model = tf.keras.models.load_model('saved_trained_model_anh_em.h5')
 
 # mở webcam
 cap = cv2.VideoCapture(0)
 
-classes = ['man', 'woman']
+classes = ['son', 'lam','bao','than_rung','viet','Binh','ky','Rim',]
 
 
 while cap.isOpened():
@@ -37,7 +37,7 @@ while cap.isOpened():
             continue
 
         # xoử lý ảnh để cho và model
-        face_crop = cv2.resize(face_crop, (96, 96))
+        face_crop = cv2.resize(face_crop, (224, 224))
         face_crop = face_crop.astype("float") / 255.0
         face_crop = tf.keras.preprocessing.image.img_to_array(face_crop)
         face_crop = np.expand_dims(face_crop, axis=0)

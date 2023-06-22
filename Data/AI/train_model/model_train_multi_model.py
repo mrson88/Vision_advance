@@ -75,7 +75,7 @@ model.compile(loss="categorical_crossentropy",
 
 # Fit model
 hitory = model.fit(train_data_augmented,
-                   epochs=10,
+                   epochs=50,
                    steps_per_epoch=len(train_data_augmented),
                    validation_data=valid_data_augmented,
                    validation_steps=len(valid_data_augmented))

@@ -4,12 +4,23 @@ import cvlib as cv
 import cv2
 import continuous_threading
 # tải model
-model = tf.keras.models.load_model('detect_face_1.h5')
+# model = tf.keras.models.load_model('detect_face_1.h5')
 
 # mở webcam
 cap = cv2.VideoCapture(0)
 
-classes = ['man', 'woman']
+# classes = ['man', 'woman']
+t=0
+def nothing():
+    global t
+    ret, img2 = cap.read()
+    img2_cut=img2[startX:startY,endX:endY]
+    t=t+1
+    ten='son/'+str(t)+'.jpg'
+    print(ten)
+    cv2.imwrite(ten,img2_cut)
+    if t == 1000:
+        thread.stop()
 
 
 while cap.isOpened():
@@ -37,24 +48,13 @@ while cap.isOpened():
             continue
 
         # xoử lý ảnh để cho và model
-        face_crop = cv2.resize(face_crop, (96, 96))
+        face_crop = cv2.resize(face_crop, (224, 224))
         face_crop = face_crop.astype("float") / 255.0
         face_crop = tf.keras.preprocessing.image.img_to_array(face_crop)
         face_crop = np.expand_dims(face_crop, axis=0)
+    thread = continuous_threading.PeriodicThread(0.1, target=nothing)
+    thread.start()
 
-        # apply ảnh để suy luận
-        # conf = model.predict(face_crop)[0]  # model.predict return a 2D matrix, ex: [[9.9993384e-01 7.4850512e-05]]
-
-        # lấy nhãn của suy luận lớn nhất
-        # idx = np.argmax(conf)
-        # label = classes[idx]
-        #
-        # label = "{}: {:.2f}%".format(label, conf[idx] * 100)
-        #
-        # Y = startY - 10 if startY - 10 > 10 else startY + 10
-        #
-        # # viết nhãn
-        # cv2.putText(frame, label, (startX, Y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
     # display output
     cv2.imshow("Detect Face", frame)
@@ -62,18 +62,8 @@ while cap.isOpened():
     # press "Q" to stop
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-def nothing():
-    global t
-    ret, img2 = cap.read()
-    img2_cut=img2[startX:endX,startY:endY]
-    t=t+1
-    ten='ky/'+str(t)+'.jpg'
-    print(ten)
-    cv2.imwrite(ten,img2_cut)
-    if t == 1000:
-        thread.stop()
 
-thread=continuous_threading.PeriodicThread(0.1, target=nothing)
-thread.start()
+
+
 cap.release()
 cv2.destroyAllWindows()

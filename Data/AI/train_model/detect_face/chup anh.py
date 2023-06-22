@@ -14,7 +14,7 @@ def nothing():
     global t
     ret, img2 = cap.read()
     t=t+1
-    ten='ky/'+str(t)+'.jpg'
+    ten='son/'+str(t)+'.jpg'
     print(ten)
     cv2.imwrite(ten,img2)
     if t == 1000:
